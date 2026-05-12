@@ -1,6 +1,6 @@
 from flask import Flask, request, render_template, redirect, session, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_session import Session
+#from flask_session import Session
 from sqlalchemy import text
 from hashlib import sha256
 from hmac import compare_digest
@@ -30,7 +30,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "endfield-dev-secret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["SESSION_PERMANENT"] = False
+app.config["_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 app.config["GROQ_MODEL"] = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
 app.config["GROQ_WEB_MODEL"] = os.getenv("GROQ_WEB_MODEL", "compound-beta-mini")
@@ -48,7 +48,7 @@ app.config["GROQ_SEARCH_DOMAINS"] = [
 ]
 
 db = SQLAlchemy(app)
-Session(app)
+#Session(app)
 
 @app.context_processor
 def inject_chatbot_reset():
